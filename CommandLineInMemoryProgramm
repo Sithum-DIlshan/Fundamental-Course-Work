@@ -1,0 +1,1015 @@
+import java.util.*;
+
+class Example {
+    public static void printaddStudent() {
+        System.out.print("-------------------------------------------------------------------------\n|\t\t\t\tADD NEW STUDENT\t\t\t\t|\n-------------------------------------------------------------------------\n\n");
+    }
+
+    public static void printaddstudentwithMarks() {
+        System.out.print("-------------------------------------------------------------------------\n|\t\t\tADD NEW STUDENT WITH MARKS\t\t\t|\n-------------------------------------------------------------------------\n\n");
+    }
+
+    public static void printaddMarks() {
+        System.out.print("-------------------------------------------------------------------------\n|\t\t\t\tADD MARKS\t\t\t\t|\n-------------------------------------------------------------------------\n\n");
+    }
+
+    public static void printupdateStudent() {
+        System.out.print("-------------------------------------------------------------------------\n|\t\t\tUPDATE STUDENT DETAILS\t\t\t\t|\n-------------------------------------------------------------------------\n\n");
+    }
+
+    public static void printupdateMarks() {
+        System.out.print("-------------------------------------------------------------------------\n|\t\t\t\tUPDATE MARKS \t\t\t\t|\n-------------------------------------------------------------------------\n\n");
+    }
+
+    public static void printdeleteStudent() {
+        System.out.print("-------------------------------------------------------------------------\n|\t\t\t\tDELETE STUDENT\t\t\t\t|\n-------------------------------------------------------------------------\n\n");
+    }
+
+    public static void printStudentdetails() {
+        System.out.print("-------------------------------------------------------------------------\n|\t\t\tPRINT STUDENT DETAILS\t\t\t\t|\n-------------------------------------------------------------------------\n\n");
+    }
+
+    public static void printStudentranks() {
+        System.out.print("-------------------------------------------------------------------------\n|\t\t\tPRINT STUDENTS' RANKS\t\t\t\t|\n-------------------------------------------------------------------------\n\n");
+    }
+
+    public static void printbestinProgramming() {
+        System.out.print("-----------------------------------------------------------------\n|\t\tBEST IN PRGRAMMING FUNDAMENTALS\t\t\t|\n-----------------------------------------------------------------\n\n");
+    }
+
+    public static void printbestinDbms() {
+        System.out.print("-----------------------------------------------------------------\n|\t\tBEST IN DATABASE MANAGEMENT SYSTEM\t\t|\n-----------------------------------------------------------------\n\n");
+    }
+
+    public final static void clearConsole() {
+        try {
+            final String os = System.getProperty("os.name");
+            if (os.contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (final Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void printTitle() {
+        System.out.print("-------------------------------------------------------------------------\n|\t\tWELCOME TO GDSE MARKS MANAGEMENT SYSTEM\t\t\t|\n-------------------------------------------------------------------------\n");
+    }
+
+    public static void printOption() {
+        System.out.println("[1] Add New Student\t\t\t[2]  Add New Student With Marks\n[3] Add Marks\t\t\t\t[4]  Update Student Details\n[5] Update Marks\t\t\t[6]  Delete Student\n[7] Print Student Details\t\t[8]  Print Student Ranks\n[9] Best in Programming Fundamentals\t[10] Best in Database Management System\n");
+    }
+
+    public static void selectOption(String[][] studentId, int Idcount, int marks[][], int total[]) {
+        Scanner in = new Scanner(System.in);
+
+
+        clearConsole();
+        printTitle();
+        printOption();
+        System.out.println();
+
+        System.out.print("Enter an option to continue > ");
+        int option = in.nextInt();
+
+        switch (option) {
+            case 1:
+                clearConsole();
+                printaddStudent();
+                addStudent(studentId, Idcount, marks, total);
+                break;
+
+            case 2:
+                clearConsole();
+                printaddstudentwithMarks();
+                addStudentwithMarks(studentId, Idcount, marks, total);
+                break;
+
+            case 3:
+                clearConsole();
+                printaddMarks();
+                addMarks(studentId, Idcount, marks, total);
+                break;
+
+            case 4:
+                clearConsole();
+                printupdateStudent();
+                updateStudent(studentId, Idcount, marks, total);
+                break;
+
+            case 5:
+                clearConsole();
+                printupdateMarks();
+                updateMarks(studentId, Idcount, marks, total);
+                break;
+
+            case 6:
+                clearConsole();
+                printdeleteStudent();
+                deleteStudent(studentId, Idcount, marks, total);
+                break;
+
+            case 7:
+                clearConsole();
+                printStudentdetails();
+                showstudentDetails(studentId, Idcount, marks, total);
+                break;
+
+            case 8:
+                clearConsole();
+                printStudentranks();
+                studentRanks(studentId, Idcount, marks, total);
+
+            case 9:
+                clearConsole();
+                printbestinProgramming();
+                bestinProgramming(studentId, Idcount, marks, total);
+
+            case 10:
+                clearConsole();
+                printbestinDbms();
+                bestinDbms(studentId, Idcount, marks, total);
+        }
+        System.out.println();
+    }
+
+    public static void addStudent(String[][] studentIdandname, int idCount, int marks[][], int total[]) {
+        Scanner in = new Scanner(System.in);
+
+        String store;
+
+
+        System.out.print("\nEnter Student ID    : ");
+        store = in.next();
+
+
+        for (int j = 0; j < 100; j++) {
+            if (studentIdandname[0][j].equals(store)) {
+                System.out.println("The Student ID already exists");
+
+                addStudent(studentIdandname, idCount, marks, total);
+                break;
+            }
+
+        }
+
+        studentIdandname[0][idCount] = store;
+
+        System.out.print("Enter Student Name  : ");
+        String tempName = in.next();
+        studentIdandname[1][idCount] = tempName;
+        ++idCount;
+
+        System.out.print("\nStudent has been added successfully. Do you want to add a new student (Y/n): ");
+
+
+        char check = in.next().charAt(0);
+        if (check == 'n') {
+            selectOption(studentIdandname, idCount, marks, total);
+
+        } else if (check == 'Y' | check == 'y') {
+            clearConsole();
+            printaddStudent();
+            addStudent(studentIdandname, idCount, marks, total);
+
+        }
+
+    }
+
+
+    public static void addStudentwithMarks(String studentIdandname[][], int idCount, int marks[][], int total[]) {
+        Scanner in = new Scanner(System.in);
+
+        String store;
+
+
+        System.out.print("\nEnter Student ID    : ");
+        store = in.next();
+
+
+        for (int j = 0; j < 100; j++) {
+            if (studentIdandname[0][j].equals(store)) {
+                System.out.println("The Student ID already exists");
+
+                addStudentwithMarks(studentIdandname, idCount, marks, total);
+                break;
+            }
+
+        }
+
+
+        studentIdandname[0][idCount] = store;
+        //  ++idCount;
+
+
+        System.out.print("Enter Student Name  : ");
+        studentIdandname[1][idCount] = in.next();
+        //++idCount;
+
+
+        System.out.print("\nProgramming Fundamental Marks    : ");
+        int progF = in.nextInt();
+
+
+        while (progF < 0 | progF > 100) {
+            System.out.println("Invalid marks, please enter correct marks");
+
+            System.out.print("\nProgramming Fundamental Marks    : ");
+            progF = in.nextInt();
+        }
+        marks[0][idCount] = progF;
+
+        System.out.print("Database Management System Marks : ");
+        int dbMarks = in.nextInt();
+
+        while (dbMarks < 0 | dbMarks > 100) {
+            System.out.println("Invalid marks, please enter correct marks");
+
+            System.out.print("\nDatabase Management System Marks : ");
+            dbMarks = in.nextInt();
+        }
+        marks[1][idCount] = dbMarks;
+
+        total[idCount] = progF + dbMarks;
+        ++idCount;
+
+
+        System.out.print("\nStudent has been added successfully. Do you want to add a new student (Y/n): ");
+
+
+        char check = in.next().charAt(0);
+        if (check == 'n') {
+
+            selectOption(studentIdandname, idCount, marks, total);
+
+        } else if (check == 'Y' | check == 'y') {
+            clearConsole();
+            printaddstudentwithMarks();
+            addStudentwithMarks(studentIdandname, idCount, marks, total);
+        } else {
+            selectOption(studentIdandname, idCount, marks, total);
+
+        }
+    }
+
+    public static void addMarks(String studentIdandname[][], int idCount, int marks[][], int total[]) {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter Student Id : ");
+        String store = in.next();
+        int tempName = 0;
+        boolean test = false;
+        int pfMarks;
+        int dbMarks;
+        for (int j = 0; j < 100; j++) {
+            if (studentIdandname[0][j].equals(store)) {
+                test = true;
+                tempName = j;
+                break;
+            }
+
+        }
+        if (test == false) {
+            System.out.print("Invalid Student ID. Do you want to search again? (Y/n) ");
+            char check = in.next().charAt(0);
+            if (check == 'n') {
+                selectOption(studentIdandname, idCount, marks, total);
+
+            } else if (check == 'Y') {
+                clearConsole();
+                printaddMarks();
+                addMarks(studentIdandname, idCount, marks, total);
+            } else {
+                System.out.print("Please Enter Only Y Or n");
+                selectOption(studentIdandname, idCount, marks, total);
+            }
+
+
+        } else {
+            System.out.println("Student Name : " + studentIdandname[1][tempName]);
+
+
+            if (marks[0][tempName] > 0 & marks[1][tempName] > 0) {
+                System.out.println("This Student's marks have been already added.\nIf you want to update the marks , please use [4] update Opiton");
+                System.out.print("\nDo you want to add marks for another student? (Y/n) ");
+                char check = in.next().charAt(0);
+                if (check == 'n') {
+                    selectOption(studentIdandname, idCount, marks, total);
+                } else if (check == 'Y') {
+                    clearConsole();
+                    printaddMarks();
+                    addMarks(studentIdandname, idCount, marks, total);
+                } else {
+                    System.out.print("Please Enter Only Y Or n");
+                    selectOption(studentIdandname, idCount, marks, total);
+                }
+            } else {
+
+
+                System.out.print("\nProgramming Fundamentals marks  : ");
+                pfMarks = in.nextInt();
+
+
+                while (pfMarks < 0 | pfMarks > 100) {
+                    System.out.println("Invalid marks,please Enter correct marks.");
+
+                    System.out.print("\nProgramming Fundamentals marks  : ");
+                    pfMarks = in.nextInt();
+                }
+                System.out.print("Database managment System marks : ");
+                dbMarks = in.nextInt();
+
+                while (dbMarks < 0 | dbMarks > 100) {
+                    System.out.println("Invalid marks,please Enter correct marks.");
+
+                    System.out.print("\nDatabase managment System marks : ");
+                    dbMarks = in.nextInt();
+
+                }
+
+                marks[0][tempName] = pfMarks;
+                marks[1][tempName] = dbMarks;
+
+                total[tempName] = pfMarks + dbMarks;
+
+
+                System.out.print("Marks have been addeded  do you want to add marks for another student(Y/n) ");
+
+
+                char check = in.next().charAt(0);
+                if (check == 'n') {
+                    selectOption(studentIdandname, idCount, marks, total);
+                } else if (check == 'Y') {
+                    clearConsole();
+                    printaddMarks();
+                    addMarks(studentIdandname, idCount, marks, total);
+                } else {
+                    System.out.print("Please Enter Only Y Or n");
+                    selectOption(studentIdandname, idCount, marks, total);
+                }
+            }
+
+        }
+    }
+
+
+    public static void updateStudent(String studentIdandname[][], int idCount, int marks[][], int total[]) {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter Student Id : ");
+        String store = in.next();
+        int tempName = 0;
+        boolean test = false;
+        for (int j = 0; j < 100; j++) {
+            if (studentIdandname[0][j].equals(store)) {
+                test = true;
+                tempName = j;
+                break;
+            }
+
+        }
+        if (test == false) {
+            System.out.print("Invalid Student ID. Do you want to search again? (Y/n) ");
+            char check = in.next().charAt(0);
+            if (check == 'n') {
+                selectOption(studentIdandname, idCount, marks, total);
+                printupdateStudent();
+                updateStudent(studentIdandname, idCount, marks, total);
+            } else if (check == 'Y') {
+                clearConsole();
+                printupdateStudent();
+                updateStudent(studentIdandname, idCount, marks, total);
+            } else {
+                System.out.print("Please Enter Only Y Or n");
+                selectOption(studentIdandname, idCount, marks, total);
+            }
+
+
+        } else {
+            System.out.println("Student Name     : " + studentIdandname[1][tempName]);
+            System.out.print("\nEnter the new student name : ");
+            String hold = in.next();
+            studentIdandname[1][tempName] = hold;
+
+            System.out.println("\nStudent details has been updated successfully.");
+            System.out.print("Do you want to update another student details? (Y/n) ");
+            char check = in.next().charAt(0);
+            if (check == 'n') {
+                selectOption(studentIdandname, idCount, marks, total);
+
+            } else if (check == 'Y') {
+                clearConsole();
+                printupdateStudent();
+                updateStudent(studentIdandname, idCount, marks, total);
+            } else {
+                System.out.print("Please Enter Only Y Or n");
+                selectOption(studentIdandname, idCount, marks, total);
+            }
+
+
+        }
+
+
+    }
+
+
+    public static void updateMarks(String studentIdandname[][], int idCount, int marks[][], int total[]) {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter Student Id : ");
+        String store = in.next();
+        int tempName = 0;
+        boolean test = false;
+        for (int j = 0; j < 100; j++) {
+            if (studentIdandname[0][j].equals(store)) {
+                test = true;
+                tempName = j;
+                break;
+            }
+
+        }
+        if (test == false) {
+            System.out.print("Invalid Student ID. Do you want to search again? (Y/n) ");
+            char check = in.next().charAt(0);
+            if (check == 'n') {
+                selectOption(studentIdandname, idCount, marks, total);
+                printupdateMarks();
+                updateMarks(studentIdandname, idCount, marks, total);
+            } else if (check == 'Y') {
+                clearConsole();
+                printupdateMarks();
+                updateMarks(studentIdandname, idCount, marks, total);
+            } else {
+                System.out.print("Please Enter Only Y Or n");
+                selectOption(studentIdandname, idCount, marks, total);
+            }
+
+
+        } else {
+            System.out.println("Student Name : " + studentIdandname[1][tempName]);
+            if (marks[0][tempName] != 0) {
+                System.out.println("\nProgramming Fundamental Marks : " + marks[0][tempName]);
+                System.out.println("Database Management System Marks : " + marks[1][tempName]);
+                System.out.print("\n\nEnter new Programming Fundamental Marks    : ");
+                int updatepF = in.nextInt();
+                while (updatepF < 0 | updatepF > 100) {
+                    System.out.println("Invalid marks,please Enter correct marks.");
+
+                    System.out.print("\n\nEnter new Programming Fundamental Marks    : ");
+                    updatepF = in.nextInt();
+                }
+
+
+                System.out.print("Enter new Database Management System Marks : ");
+                int updatedB = in.nextInt();
+                while (updatedB < 0 | updatedB > 100) {
+                    System.out.println("Invalid marks,please Enter correct marks.");
+
+                    System.out.print("\nEnter new Database Management System Marks : ");
+                    updatedB = in.nextInt();
+
+                }
+
+
+                System.out.print("Marks have been updated successfully.");
+                marks[0][tempName] = updatepF;
+                marks[1][tempName] = updatedB;
+
+                total[tempName] = updatepF + updatedB;
+
+
+                System.out.print("Do you want to update another student? (Y/n) ");
+                char check = in.next().charAt(0);
+                if (check == 'n') {
+                    selectOption(studentIdandname, idCount, marks, total);
+                    printupdateMarks();
+                    updateMarks(studentIdandname, idCount, marks, total);
+                } else if (check == 'Y') {
+                    clearConsole();
+                    printupdateMarks();
+                    updateMarks(studentIdandname, idCount, marks, total);
+                } else {
+                    System.out.print("Please Enter Only Y Or n");
+                    selectOption(studentIdandname, idCount, marks, total);
+                }
+
+            } else {
+
+                System.out.print("\nThis student marks yet to be added.");
+                System.out.print("\nDo you want to update the marks of another student? (Y/n) ");
+                char check = in.next().charAt(0);
+                if (check == 'n') {
+                    selectOption(studentIdandname, idCount, marks, total);
+                    printupdateMarks();
+                    updateMarks(studentIdandname, idCount, marks, total);
+                } else if (check == 'Y') {
+                    clearConsole();
+                    printupdateMarks();
+                    updateMarks(studentIdandname, idCount, marks, total);
+                } else {
+                    System.out.print("Please Enter Only Y Or n");
+                    selectOption(studentIdandname, idCount, marks, total);
+                }
+
+            }
+
+        }
+    }
+
+    public static void deleteStudent(String[][] studentIdandname, int idCount, int marks[][], int total[]) {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter Student Id : ");
+        String store = in.next();
+        int tempName = 0;
+        boolean test = false;
+        for (int j = 0; j < 100; j++) {
+            if (studentIdandname[0][j].equals(store)) {
+                test = true;
+                tempName = j;
+                break;
+            }
+
+        }
+        if (test == false) {
+            System.out.print("Invalid Student ID. Do you want to search again? (Y/n) ");
+            char check = in.next().charAt(0);
+            if (check == 'n') {
+                selectOption(studentIdandname, idCount, marks, total);
+
+            } else if (check == 'Y') {
+
+                System.out.println();
+                deleteStudent(studentIdandname, idCount, marks, total);
+            } else {
+                System.out.print("Please Enter Only Y Or n");
+                selectOption(studentIdandname, idCount, marks, total);
+            }
+
+
+        } else {
+            studentIdandname[0][tempName] = "null";
+            studentIdandname[1][tempName] = "null";
+
+            marks[0][tempName] = 0;
+            marks[1][tempName] = 0;
+
+            total[tempName] = 0;
+
+            System.out.print("Student has been deleted successfully.");
+            System.out.print("\nDo you want to delete another student? (Y/n) ");
+            char check = in.next().charAt(0);
+            if (check == 'n') {
+                selectOption(studentIdandname, idCount, marks, total);
+
+            } else if (check == 'Y') {
+                clearConsole();
+                printdeleteStudent();
+                deleteStudent(studentIdandname, idCount, marks, total);
+            } else {
+                System.out.print("Please Enter Only Y Or n");
+                selectOption(studentIdandname, idCount, marks, total);
+            }
+        }
+
+
+    }
+
+
+    public static void showstudentDetails(String[][] studentIdandname, int Idcount, int marks[][], int total[]) {
+        Scanner in = new Scanner(System.in);
+        int tempoTotal[] = new int[100];
+        int tempO;
+        int rank = 0;
+
+        for (int i = 0; i < 100; i++) {
+            tempoTotal[i] = total[i];
+
+        }
+        for (int i = 0; i < tempoTotal.length; i++) {
+            for (int j = i + 1; j < tempoTotal.length; j++) {
+                if (tempoTotal[i] < tempoTotal[j]) {
+                    tempO = tempoTotal[i];
+                    tempoTotal[i] = tempoTotal[j];
+                    tempoTotal[j] = tempO;
+                }
+            }
+        }
+
+
+        System.out.print("Enter Student Id : ");
+        String store = in.next();
+        int tempName = 0;
+        boolean test = false;
+        for (int j = 0; j < 100; j++) {
+            if (studentIdandname[0][j].equals(store)) {
+                test = true;
+                tempName = j;
+                break;
+            }
+
+        }
+        if (test == false) {
+            System.out.print("Invalid Student ID. Do you want to search again? (Y/n) ");
+            char check = in.next().charAt(0);
+            if (check == 'n') {
+                selectOption(studentIdandname, Idcount, marks, total);
+            } else if (check == 'Y') {
+
+                System.out.println();
+                showstudentDetails(studentIdandname, Idcount, marks, total);
+            } else {
+                System.out.print("Please Enter Only Y Or n");
+                selectOption(studentIdandname, Idcount, marks, total);
+            }
+        } else {
+            if (marks[0][tempName] == 0) {
+                System.out.println("Student name : " + studentIdandname[1][tempName]);
+                System.out.println("\nMarks yet to be added.");
+                System.out.print("\nDo you want search another student details (Y/n) ");
+                char check = in.next().charAt(0);
+                if (check == 'n') {
+                    selectOption(studentIdandname, Idcount, marks, total);
+                } else if (check == 'Y') {
+                    clearConsole();
+                    printStudentdetails();
+                    showstudentDetails(studentIdandname, Idcount, marks, total);
+                } else {
+                    System.out.print("Please Enter Only Y Or n");
+                    selectOption(studentIdandname, Idcount, marks, total);
+                }
+
+            } else {
+
+
+                System.out.println("Student name : " + studentIdandname[1][tempName]);
+
+
+                double tempTotal = total[tempName];
+                double avg = tempTotal / 2.00;
+
+                for (int i = 0; i < total.length; i++) {
+                    if (tempTotal == tempoTotal[i]) {
+                        rank = i + 1;
+                        break;
+                    }
+
+                }
+                String s;
+
+                switch (rank) {
+                    case 1:
+                        s = " (First)";
+                        break;
+
+                    case 2:
+                        s = " (Second)";
+                        break;
+
+                    case 3:
+                        s = " (Third)";
+                        break;
+
+                    case 4:
+                        s = " (Fourth)";
+                        break;
+
+                    case 5:
+                        s = " (Fifth)";
+                        break;
+
+                    case 6:
+                        s = " (Sixth)";
+                        break;
+
+                    case 7:
+                        s = " (Seventh)";
+                        break;
+
+                    case 8:
+                        s = " (Eighth)";
+                        break;
+
+                    case 9:
+                        s = " (Ninth)";
+                        break;
+
+                    case 10:
+                        s = "(Tenth)";
+                        break;
+
+                    case 11:
+                        s = " (Eleventh)";
+                        break;
+
+                    case 12:
+                        s = " (Twelfth)";
+                        break;
+
+                    default:
+                        s = "\bLast";
+                        break;
+
+                }
+                String sRank = rank + s;
+
+
+                System.out.print("+------------------------------------+--------------------+\n");
+                System.out.printf("%6s%7s%20d%1s\n", "|Programming fundermentel marks", "|", marks[0][tempName], "|");
+                System.out.printf("%6s%5s%20d%1s\n", "|Database Management System Marks", "|", marks[1][tempName], "|");
+                System.out.printf("%6s%26s%20d%1s\n", "|Total Marks", "|", total[tempName], "|");
+                System.out.printf("%6s%27s%20.2f%1s\n", "|Avg. Marks", "|", avg, "|");
+                System.out.printf("%5s%33s%20s%1s\n", "|Rank", "|", sRank, "|");
+                System.out.print("+------------------------------------+--------------------+\n");
+
+
+                System.out.print("\nDo you want to search another student details? (Y/n) ");
+                char check = in.next().charAt(0);
+                if (check == 'n') {
+                    selectOption(studentIdandname, Idcount, marks, total);
+                } else if (check == 'Y') {
+                    clearConsole();
+                    printStudentdetails();
+                    showstudentDetails(studentIdandname, Idcount, marks, total);
+                } else {
+                    System.out.print("Please Enter Only Y Or n");
+                    selectOption(studentIdandname, Idcount, marks, total);
+                }
+
+            }
+        }
+    }
+
+    public static void studentRanks(String[][] studentIdandname, int Idcount, int marks[][], int total[]) {
+        Scanner in = new Scanner(System.in);
+        int tempoTotal[] = new int[100];
+        int tempO;
+        int rank;
+        double avg;
+        String tempId;
+        String tempName;
+        double tempTot;
+
+        for (int i = 0; i < 100; i++) {
+            tempoTotal[i] = total[i];
+
+        }
+        for (int i = 0; i < tempoTotal.length; i++) {
+            for (int j = i + 1; j < tempoTotal.length; j++) {
+                if (tempoTotal[i] < tempoTotal[j]) {
+                    tempO = tempoTotal[i];
+                    tempoTotal[i] = tempoTotal[j];
+                    tempoTotal[j] = tempO;
+                }
+            }
+        }
+
+        if (tempoTotal[0] != 0) {
+
+            System.out.print("+-----+---------+-------------------+-----------+----------+\n");
+            System.out.print("|Rank |ID	|Name               |Total Marks|Avg. Marks|\n");
+            System.out.print("+-----+---------+-------------------+-----------+----------+\n");
+
+
+            for (int i = 0; i < total.length; i++) {
+                for (int j = total.length - 1; j >= 0; j--) {
+                    if (tempoTotal[i] == total[j] && tempoTotal[i] != 0) {
+
+
+                        tempTot = tempoTotal[i];
+                        rank = i + 1;
+                        tempId = studentIdandname[0][j];
+                        tempName = studentIdandname[1][j];
+                        avg = tempTot / 2.00;
+                        System.out.printf("|%-5d|%-9s|%-19s|%11.0f|%10.2f|%n", rank, tempId, tempName, tempTot, avg);
+
+                    }
+                }
+
+            }
+
+            System.out.print("+-----+---------+-------------------+-----------+----------+\n");
+
+
+            System.out.print("Do you want to go back to main menu (Y/n) ");
+            char check = in.next().charAt(0);
+            if (check == 'n') {
+                clearConsole();
+                printStudentranks();
+                studentRanks(studentIdandname, Idcount, marks, total);
+
+            } else if (check == 'Y') {
+                clearConsole();
+                selectOption(studentIdandname, Idcount, marks, total);
+            } else {
+                System.out.print("Please Enter Only Y Or n");
+                selectOption(studentIdandname, Idcount, marks, total);
+            }
+        } else {
+            System.out.print("Students with marks yet to be add. Do you want to go back to main menu (Y/n) ");
+            char check = in.next().charAt(0);
+            if (check == 'n') {
+                clearConsole();
+                printStudentranks();
+                studentRanks(studentIdandname, Idcount, marks, total);
+
+            } else if (check == 'Y') {
+                selectOption(studentIdandname, Idcount, marks, total);
+            } else {
+
+                selectOption(studentIdandname, Idcount, marks, total);
+            }
+
+        }
+
+
+    }
+
+
+    public static void bestinProgramming(String[][] studentIdandname, int Idcount, int marks[][], int total[]) {
+        Scanner in = new Scanner(System.in);
+        int programming[] = new int[100];
+        int tempO;
+        int tempP;
+        int tempD;
+        String tempId;
+        String tempName;
+
+        for (int i = 0; i < 100; i++) {
+            programming[i] = marks[0][i];
+
+        }
+
+
+        for (int i = 0; i < programming.length; i++) {
+            for (int j = i + 1; j < programming.length; j++) {
+                if (programming[i] < programming[j]) {
+                    tempO = programming[i];
+                    programming[i] = programming[j];
+                    programming[j] = tempO;
+                }
+            }
+        }
+
+        if (programming[0] != 0) {
+
+            System.out.print("+-----+---------------------+--------+----------+\n");
+            System.out.print("|ID   |Name                 |PF Marks|DBMS Marks|\n");
+            System.out.print("+-----+---------------------+--------+----------+\n");
+
+
+            for (int i = 0; i < total.length; i++) {
+                for (int j = total.length - 1; j >= 0; j--) {
+                    if (programming[i] == marks[0][j] && programming[i] != 0) {
+
+                        tempP = programming[i];
+                        tempId = studentIdandname[0][j];
+                        tempName = studentIdandname[1][j];
+                        tempD = marks[1][j];
+
+                        System.out.printf("|%-5s|%-21s|%-8d|%-10d|%n", tempId, tempName, tempP, tempD);
+
+                    }
+
+                }
+
+            }
+
+            System.out.print("+-----+---------------------+--------+----------+\n");
+
+            System.out.print("\nDo you want to go back to main menu (Y/n) ");
+            char check = in.next().charAt(0);
+            if (check == 'n') {
+                clearConsole();
+                printbestinProgramming();
+                bestinProgramming(studentIdandname, Idcount, marks, total);
+
+            } else if (check == 'Y') {
+                selectOption(studentIdandname, Idcount, marks, total);
+            } else {
+                selectOption(studentIdandname, Idcount, marks, total);
+            }
+
+        } else {
+            System.out.print("Students with marks yet to be add. Do you want to go back to main menu (Y/n) ");
+            char check = in.next().charAt(0);
+            if (check == 'n') {
+                clearConsole();
+                printbestinProgramming();
+                bestinProgramming(studentIdandname, Idcount, marks, total);
+
+            } else if (check == 'Y') {
+                selectOption(studentIdandname, Idcount, marks, total);
+            } else {
+
+                selectOption(studentIdandname, Idcount, marks, total);
+            }
+
+        }
+
+    }
+
+
+    public static void bestinDbms(String[][] studentIdandname, int Idcount, int marks[][], int total[]) {
+        Scanner in = new Scanner(System.in);
+        int dbms[] = new int[100];
+        int tempO;
+        int tempP;
+        int tempD;
+        String tempId;
+        String tempName;
+
+        for (int i = 0; i < 100; i++) {
+            dbms[i] = marks[1][i];
+
+        }
+
+        for (int i = 0; i < dbms.length; i++) {
+            for (int j = i + 1; j < dbms.length; j++) {
+                if (dbms[i] < dbms[j]) {
+                    tempO = dbms[i];
+                    dbms[i] = dbms[j];
+                    dbms[j] = tempO;
+                }
+            }
+        }
+
+        if (dbms[0] != 0) {
+
+            System.out.print("+-----+---------------------+----------+--------+\n");
+            System.out.print("|ID   |Name                 |DBMS Marks|PF Marks|\n");
+            System.out.print("+-----+---------------------+----------+--------+\n");
+
+
+            for (int i = 0; i < dbms.length; i++) {
+                for (int j = dbms.length - 1; j >= 0; j--) {
+                    if (dbms[i] == marks[1][j] && dbms[i] != 0) {
+
+                        tempD = dbms[i];
+                        tempId = studentIdandname[0][j];
+                        tempName = studentIdandname[1][j];
+                        tempP = marks[0][j];
+                        System.out.printf("|%-5s|%-21s|%-10d|%-8d|%n", tempId, tempName, tempD, tempP);
+                    }
+
+                }
+
+            }
+
+            System.out.print("+-----+---------------------+----------+--------+\n");
+
+            System.out.print("\nDo you want to go back to main menu (Y/n) ");
+            char check = in.next().charAt(0);
+            if (check == 'n') {
+                clearConsole();
+                printbestinDbms();
+                bestinDbms(studentIdandname, Idcount, marks, total);
+
+            } else if (check == 'Y') {
+                selectOption(studentIdandname, Idcount, marks, total);
+            } else {
+                selectOption(studentIdandname, Idcount, marks, total);
+            }
+
+        } else {
+            System.out.print("\nStudents with marks yet to be add. Do you want to go back to main menu (Y/n) ");
+            char check = in.next().charAt(0);
+            if (check == 'n') {
+                clearConsole();
+                printbestinDbms();
+                bestinDbms(studentIdandname, Idcount, marks, total);
+
+            } else if (check == 'Y') {
+                selectOption(studentIdandname, Idcount, marks, total);
+            } else {
+
+                selectOption(studentIdandname, Idcount, marks, total);
+            }
+
+        }
+
+    }
+
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+
+
+        String studentId[][] = new String[2][100];
+        int marks[][] = new int[2][100];
+
+        int Idcount = 0;
+
+        int total[] = new int[100];
+
+
+        for (int i = 0; i < studentId.length; i++) {
+            for (int j = 0; j < 100; j++) {
+                studentId[i][j] = "null";
+            }
+
+        }
+
+        selectOption(studentId, Idcount, marks, total);
+        System.out.println();
+
+    }
+}
